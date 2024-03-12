@@ -2,8 +2,7 @@ package com.SocialMediaAppNew.SocialMediaAppNew;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,9 +24,19 @@ public class UserController {
        return userDaoService.findAllUsers();
     }
 
-    @GetMapping("/users/1")
-    User findUserById(){
-        return userDaoService.findUserById(1);
+    @GetMapping("/users/{id}")//path variable
+    User findUserById(@PathVariable("id") int id){ //@PathVariable
+        return userDaoService.findUserById(id);
+    }
+
+    @PostMapping("/users")
+    public User createUser( @RequestBody User user){
+        return userDaoService.createUser(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public boolean deleteUser(@PathVariable("id") int id){
+      return  userDaoService.deleteUser(id);
     }
 
 
