@@ -67,5 +67,76 @@ public class UserDaoService {
        return false;
    }
 
+   public User  updateUser(int id, User newUser){
 
-}
+
+       /*
+       1. Iterate on the list and get the existing user object with id - that we are passing in the method
+       2. Create a new user object and update the new user with the name and date of birth that we are passing in the method
+       3. Get the index of the existing user object from the userlist - by using indexOf method of ArrayList
+       4. Update the new user in the userList
+       5. return the new user
+
+
+        */
+
+       //TODO COMPLETE THE CODE BY RESOLVING NULL PARAMETER BUG
+       User updateUser = new User();
+
+       for(User existingUser: userList) {
+
+           if (existingUser.getId() == id) {
+               updateUser.setId(existingUser.getId());
+               updateUser.setName(newUser.getName());
+               updateUser.setBirthDate(newUser.getBirthDate());
+
+               int index = userList.indexOf(existingUser);
+
+               userList.set(index, updateUser);
+
+           }
+       }
+
+           return updateUser;
+
+       }
+
+   public User updateUser(User newUser){
+
+              /*
+                 1. Iterate on the list and check the user id that is matching with the newUser's id
+                 2. Get the existing object from the userlist with the id matching with newUser's id
+                 3. replace the userlist object with newUser object at the matched id
+              */
+       User updateUser = new User();
+
+       for(User existingUser: userList){
+           if(existingUser.getId() == newUser.getId()){
+
+               updateUser.setId(existingUser.getId());
+
+               if(newUser.getName() != null) {
+                   existingUser.setName(newUser.getName());
+                   updateUser.setName(newUser.getName());
+               } else {
+                   updateUser.setName(existingUser.getName());
+               }
+
+               if(newUser.getBirthDate() != null){
+                      existingUser.setBirthDate(newUser.getBirthDate());
+                      updateUser.setBirthDate(newUser.getBirthDate());
+               } else{
+                   updateUser.setBirthDate(existingUser.getBirthDate());
+               }
+               int index = userList.indexOf(existingUser);
+               userList.set(index, existingUser);
+           }
+       }
+
+       return updateUser;
+
+
+
+   }
+
+   }

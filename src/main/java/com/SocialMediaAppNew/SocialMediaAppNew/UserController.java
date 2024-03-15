@@ -39,6 +39,16 @@ public class UserController {
       return  userDaoService.deleteUser(id);
     }
 
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable("id") int id, @RequestBody User user){
+        return userDaoService.updateUser(id, user);
+    }
+
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user){
+        return userDaoService.updateUser(user);
+    }
+
 
 
 }
