@@ -1,4 +1,4 @@
-package com.SocialMediaAppNew.SocialMediaAppNew;
+package com.SocialMediaAppNew.SocialMediaAppNew.model;
 
 import java.time.LocalDate;
 import java.util.Date;

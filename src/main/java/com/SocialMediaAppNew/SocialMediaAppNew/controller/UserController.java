@@ -1,6 +1,8 @@
-package com.SocialMediaAppNew.SocialMediaAppNew;
+package com.SocialMediaAppNew.SocialMediaAppNew.controller;
 
 
+import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
+import com.SocialMediaAppNew.SocialMediaAppNew.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,7 @@
-package com.SocialMediaAppNew.SocialMediaAppNew;
+package com.SocialMediaAppNew.SocialMediaAppNew.service;
 
-import org.springframework.stereotype.Component;
+import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
+import com.SocialMediaAppNew.SocialMediaAppNew.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,6 +36,7 @@ public class UserDaoService {
    }
 
     public List<User> findAllUsers(){
+
        return userList;
     }
 
@@ -44,7 +46,7 @@ public class UserDaoService {
                return user;
        }
 
-       return null;
+       throw new UserNotFoundException("User not found with the given id:" +id);
     }
 
    public User createUser(User user){
