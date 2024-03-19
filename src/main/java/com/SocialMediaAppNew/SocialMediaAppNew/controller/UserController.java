@@ -4,8 +4,12 @@ package com.SocialMediaAppNew.SocialMediaAppNew.controller;
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import com.SocialMediaAppNew.SocialMediaAppNew.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,8 +36,11 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser( @RequestBody User user){
-        return userDaoService.createUser(user);
+    public ResponseEntity<Object> createUser(@RequestBody User user){
+
+        User savedUser = userDaoService.createUser(user);
+        URI uri = URI.create("http://localhost:8080/users/" +savedUser.getId()); // http://localhost:8080/users/4
+       return new ResponseEntity<>(uri, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/users/{id}")
