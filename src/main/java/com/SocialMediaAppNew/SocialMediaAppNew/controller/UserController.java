@@ -3,6 +3,7 @@ package com.SocialMediaAppNew.SocialMediaAppNew.controller;
 
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import com.SocialMediaAppNew.SocialMediaAppNew.service.UserDaoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +37,14 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@RequestBody User user){
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
 
         User savedUser = userDaoService.createUser(user);
-        URI uri = URI.create("http://localhost:8080/users/" +savedUser.getId()); // http://localhost:8080/users/4
+        //URI uri = URI.create("http://localhost:8080/users/" +savedUser.getId()); // http://localhost:8080/users/4
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()  //http://localhost:8080/users
+                                             .path("/{id}")   //http://localhost:8080/users/{id}
+                                             .buildAndExpand(savedUser.getId())  //http://localhost:8080/users/4
+                                             .toUri();
        return new ResponseEntity<>(uri, HttpStatus.CREATED);
     }
 

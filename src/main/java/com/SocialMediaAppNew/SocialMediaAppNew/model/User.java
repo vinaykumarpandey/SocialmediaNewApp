@@ -1,5 +1,9 @@
 package com.SocialMediaAppNew.SocialMediaAppNew.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -7,7 +11,11 @@ import java.util.Date;
 //POJO - Plain Old Java Object
 public class User {
     private int id;
+
+    @Size(min=2, message = "name should be atleast of 2 characters")
     private String name;
+
+    @Past(message = "birthDate can't be in future date")
     private LocalDate birthDate;
 
     public User() {
