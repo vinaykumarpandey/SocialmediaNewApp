@@ -1,5 +1,8 @@
 package com.SocialMediaAppNew.SocialMediaAppNew.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -8,8 +11,12 @@ import java.time.LocalDate;
 import java.util.Date;
 
 
+@Entity(name = "user_details")
 //POJO - Plain Old Java Object
 public class User {
+
+    @Id
+    @GeneratedValue
     private int id;
 
     @Size(min=2, message = "name should be atleast of 2 characters")
