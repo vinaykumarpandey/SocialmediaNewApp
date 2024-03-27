@@ -3,8 +3,10 @@ package com.SocialMediaAppNew.SocialMediaAppNew.controller;
 
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import com.SocialMediaAppNew.SocialMediaAppNew.service.UserDaoService;
+import com.SocialMediaAppNew.SocialMediaAppNew.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,8 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserDaoService userDaoService;
+    @Qualifier("userJpaService")
+    UserService userService;
 
     @GetMapping("/message")
     public String getMessage(){
@@ -28,18 +31,18 @@ public class UserController {
     @GetMapping("/users")
     List<User> findAllUsers(){
 
-       return userDaoService.findAllUsers();
+       return userService.findAllUsers();
     }
 
     @GetMapping("/users/{id}")//path variable
     User findUserById(@PathVariable("id") int id){ //@PathVariable
-        return userDaoService.findUserById(id);
+        return userService.findUserById(id);
     }
 
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
 
-        User savedUser = userDaoService.createUser(user);
+        User savedUser = userService.createUser(user);
         //URI uri = URI.create("http://localhost:8080/users/" +savedUser.getId()); // http://localhost:8080/users/4
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()  //http://localhost:8080/users
                                              .path("/{id}")   //http://localhost:8080/users/{id}
@@ -50,18 +53,18 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public boolean deleteUser(@PathVariable("id") int id){
-      return  userDaoService.deleteUser(id);
+      return  userService.deleteUser(id);
     }
 
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable("id") int id, @RequestBody User user){
-        return userDaoService.updateUser(id, user);
+        return userService.updateUser(id, user);
     }
 
-    @PutMapping("/users")
+/*    @PutMapping("/users")
     public User updateUser(@RequestBody User user){
-        return userDaoService.updateUser(user);
-    }
+        return userService.updateUser(user);
+    }*/
 
 
 

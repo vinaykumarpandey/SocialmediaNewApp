@@ -2,6 +2,7 @@ package com.SocialMediaAppNew.SocialMediaAppNew.service;
 
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import com.SocialMediaAppNew.SocialMediaAppNew.exception.UserNotFoundException;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Service
-public class UserDaoService {
+@Service("userDaoService")
+public class UserDaoService implements UserService {
 
     //List<User> findAllusers()         Get All the users -Done
 
