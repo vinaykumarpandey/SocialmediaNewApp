@@ -2,6 +2,7 @@ package com.SocialMediaAppNew.SocialMediaAppNew.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Past;
@@ -16,8 +17,8 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Size(min=2, message = "name should be atleast of 2 characters")
     private String name;

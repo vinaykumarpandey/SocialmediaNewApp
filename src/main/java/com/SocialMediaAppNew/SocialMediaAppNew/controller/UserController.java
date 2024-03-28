@@ -2,11 +2,9 @@ package com.SocialMediaAppNew.SocialMediaAppNew.controller;
 
 
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
-import com.SocialMediaAppNew.SocialMediaAppNew.service.UserDaoService;
 import com.SocialMediaAppNew.SocialMediaAppNew.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +12,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
 
     @Autowired
-    @Qualifier("userJpaService")
+   // @Qualifier("userDaoService")
     UserService userService;
 
     @GetMapping("/message")
@@ -35,12 +34,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")//path variable
-    User findUserById(@PathVariable("id") int id){ //@PathVariable
+    Optional<User> findUserById(@PathVariable("id") int id){ //@PathVariable
         return userService.findUserById(id);
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
+    public ResponseEntity<Object> createUser(@RequestBody User user){
 
         User savedUser = userService.createUser(user);
         //URI uri = URI.create("http://localhost:8080/users/" +savedUser.getId()); // http://localhost:8080/users/4

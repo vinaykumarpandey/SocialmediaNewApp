@@ -2,12 +2,12 @@ package com.SocialMediaAppNew.SocialMediaAppNew.service;
 
 import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import com.SocialMediaAppNew.SocialMediaAppNew.exception.UserNotFoundException;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service("userDaoService")
@@ -41,10 +41,10 @@ public class UserDaoService implements UserService {
        return userList;
     }
 
-   public User findUserById(int id){
+   public Optional<User> findUserById(int id){
        for(User user: userList){
            if(user.getId() == id)
-               return user;
+               return Optional.of(user);
        }
 
        throw new UserNotFoundException("User not found with the given id:" +id);

@@ -4,6 +4,7 @@ import com.SocialMediaAppNew.SocialMediaAppNew.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface UserService {
@@ -15,7 +16,7 @@ public interface UserService {
 
     public User  updateUser(int id, User newUser);
 
-    public User findUserById(int id);
+    public Optional<User> findUserById(int id);
 
 
 
